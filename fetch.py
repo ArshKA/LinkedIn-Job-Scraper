@@ -62,7 +62,6 @@ class JobSearchRetriever:
 
         for r in results['data']['elements']:
             job_id = int(strip_val(r['hitInfo']['jobPosting'], 1))
-            # job_ids[job_id] = results
             job_ids[job_id] = {}
             if r['hitInfo'].get('sponsored'):
                 job_ids[job_id]['sponsored'] = True

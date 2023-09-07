@@ -25,6 +25,6 @@ while True:
     details = job_detail_retriever.get_job_details(result[:25])
     details = clean_job_postings(details)
     insert_data(details, conn, cursor)
-    print('Updated DB')
-    time.sleep(30)
+    print('Updated {} results in DB').format(len(details))
+    time.sleep(60)
 
