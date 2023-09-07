@@ -95,7 +95,7 @@ class JobDetailRetriever:
             'X-Li-Track': '{"clientVersion":"1.12.7880","mpVersion":"1.12.7880","osName":"web","timezoneOffset":-7,"timezone":"America/Los_Angeles","deviceFormFactor":"DESKTOP","mpName":"voyager-web","displayDensity":1,"displayWidth":1920,"displayHeight":1080}'
         } for session in self.sessions]
 
-        # self.proxies = [{'http': f'http://{proxy}', 'https': f'http://{proxy}'} for proxy in ['ujtvrwof:7dfuckrl880s@185.199.231.45:8382', 'ujtvrwof:7dfuckrl880s@188.74.210.207:6286', 'ujtvrwof:7dfuckrl880s@188.74.183.10:8279']]
+        # self.proxies = [{'http': f'http://{proxy}', 'https': f'http://{proxy}'} for proxy in []]
 
 
     def get_job_details(self, job_ids):
