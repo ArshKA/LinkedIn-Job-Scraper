@@ -95,7 +95,7 @@ class JobDetailRetriever:
             'X-Li-Track': '{"clientVersion":"1.12.7880","mpVersion":"1.12.7880","osName":"web","timezoneOffset":-7,"timezone":"America/Los_Angeles","deviceFormFactor":"DESKTOP","mpName":"voyager-web","displayDensity":1,"displayWidth":1920,"displayHeight":1080}'
         } for session in self.sessions]
 
-        self.proxies = [{'http': f'http://{proxy}', 'https': f'http://{proxy}'} for proxy in ['ujtvrwof:7dfuckrl880s@185.199.231.45:8382', 'ujtvrwof:7dfuckrl880s@188.74.210.207:6286', 'ujtvrwof:7dfuckrl880s@188.74.183.10:8279']]
+        # self.proxies = [{'http': f'http://{proxy}', 'https': f'http://{proxy}'} for proxy in ['ujtvrwof:7dfuckrl880s@185.199.231.45:8382', 'ujtvrwof:7dfuckrl880s@188.74.210.207:6286', 'ujtvrwof:7dfuckrl880s@188.74.183.10:8279']]
 
 
     def get_job_details(self, job_ids):
@@ -103,7 +103,7 @@ class JobDetailRetriever:
         for job_id in job_ids:
             error = False
             try:
-                details = self.sessions[self.session_index].get(self.job_details_link.format(job_id), headers=self.headers[self.session_index], proxies=self.proxies[self.session_index], timeout=5)
+                details = self.sessions[self.session_index].get(self.job_details_link.format(job_id), headers=self.headers[self.session_index])#, proxies=self.proxies[self.session_index], timeout=5)
             except requests.exceptions.Timeout:
                 print('Timeout for job {}'.format(job_id))
                 error = True
