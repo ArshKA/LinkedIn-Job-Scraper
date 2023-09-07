@@ -101,8 +101,6 @@ class JobDetailRetriever:
     def get_job_details(self, job_ids):
         job_details = {}
         for job_id in job_ids:
-            if str(job_id) in ['3692364601', '3693039529', '3693046078', '3693050000', '3693065849', '3693595922', '3694102525', '3694103173', '3699062058']:
-                continue
             error = False
             try:
                 details = self.sessions[self.session_index].get(self.job_details_link.format(job_id), headers=self.headers[self.session_index], proxies=self.proxies[self.session_index], timeout=5)
@@ -110,6 +108,7 @@ class JobDetailRetriever:
                 print('Timeout for job {}'.format(job_id))
                 error = True
             if details.status_code != 200:
+                job_details[job_id] = False
                 print('Status code {} for job {}\nText: {}'.format(details.status_code, job_id, details.text))
                 error = True
             if error:
