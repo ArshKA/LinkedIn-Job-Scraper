@@ -1,0 +1,16 @@
+path,name,strip,type,table
+['name'],name,0,Company,companies
+['description'],description,0,Company,companies
+['url'],url,0,Company,companies
+['staffCount'],employee_count,0,Company,employee_counts
+['staffCountRange'],company_size,0,Company,companies
+['followerCount'],follower_count,0,FollowingInfo,employee_counts
+['headquarter']['country'],country,0,Company,companies
+['headquarter']['geographicArea'],state,0,Company,companies
+['headquarter']['city'],city,0,Company,companies
+['headquarter']['postalCode'],zip_code,0,Company,companies
+['headquarter']['line1'],address,0,Company,companies
+['industries'],industries,0,Company,company_industries
+['specialities'],specialities,0,Company,company_specialities
+
+
