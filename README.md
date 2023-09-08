@@ -7,6 +7,6 @@
 
 It's important to note that while ```search_retriever.py``` typically runs smoothly, even when using your personal IP and a single account, ```details_retriever.py``` can be a bit finicky. This is because each search generates approximately 25-50 results, all of which must be individually queried to obtain their attributes. To enhance its performance, I recommend the following strategies:
 
-- Employ multiple proxies and accounts when running details_retriever.py.
+- Utilize multiple proxies and accounts when running details_retriever.py.
 - Experiment with different time delays to find the optimal settings.
 - Run details_retriever.py during periods of lower online activity, such as late-night hours and weekends, to catch up with the progress of search_retriever.py. This will ensure that both processes remain synchronized and up to date.
