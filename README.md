@@ -1,15 +1,17 @@
 # LinkedIn-Job-Scraper
 
-**An un-documented and un-polished repository to assist others seeking to scrape jobs from LinkedIn**
+**An un-documented and crude repository to assist others seeking to scrape LinkedIn**
 
 **Download the polished dataset and view insights at - https://www.kaggle.com/datasets/arshkon/linkedin-job-postings**
+
+
+## Brief Code Summary
+
 
 ```search_retriever.py``` - discovers new job postings and insert the most recent IDs into the database
 
 ```details_retriever.py``` - populates table with individual job attributes
 
-
-## Brief Code Summary
 
 It's important to note that while ```search_retriever.py``` typically runs smoothly, even through your personal IP and a singular account, ```details_retriever.py``` can be a bit finicky. Each search generates approximately 25-50 results, all of which must be individually queried to obtain their attributes. To enhance its performance, I recommend the following strategies:
 
