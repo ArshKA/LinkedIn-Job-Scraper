@@ -13,8 +13,6 @@ def create_session(email, password):
 
     driver.get('https://www.linkedin.com/checkpoint/rm/sign-in-another-account')
     time.sleep(1)
-    # driver.find_element(By.ID, 'username').send_keys('anonymouskingcheetah@gmail.com')
-    # driver.find_element(By.ID, 'password').send_keys('Bot_Moment')
     driver.find_element(By.ID, 'username').send_keys(email)
     driver.find_element(By.ID, 'password').send_keys(password)
     driver.find_element(By.XPATH, '//*[@id="organic-div"]/form/div[3]/button').click()
