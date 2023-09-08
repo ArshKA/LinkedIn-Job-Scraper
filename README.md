@@ -1,7 +1,12 @@
 # LinkedIn-Job-Scraper
 
-Run search_retriever.py to find new job postings and insert most recent ids to db
+```search_retriever.py``` - discovers new job postings and insert the most recent IDs into the database
 
-Run details_retriever.py to populate table with individual job api call
+```details_retriever.py``` - populates table with individual job attributes
 
-While ```search_retriever.py``` should not cause any problems even through your personal IP and a singular account, ```details_retriever.py``` can be finicky since every search yields ≈25-50 results, which all need to be called individually to obtain their attributes. I recommend utilizing multiple proxys and accounts with ```details_retriever.py``` and playing around with the delay. Keep in mind it can continue running during lower activity hours and weekends to catch up with ```search_retriever.py```.
+
+It's important to note that while ```search_retriever.py``` typically runs smoothly even when using your personal IP and a single account, ```details_retriever.py``` can be a bit finicky. This is because each search generates approximately 25-50 results, all of which must be individually queried to obtain their attributes. To enhance its performance, I recommend the following strategies:
+
+- Employ multiple proxies and accounts when running details_retriever.py.
+- Experiment with different time delays to find the optimal settings.
+- Run details_retriever.py during periods of lower online activity, such as late-night hours and weekends, to catch up with the progress of search_retriever.py. This will ensure that both processes remain synchronized and up to date.
