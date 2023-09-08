@@ -5,7 +5,7 @@
 ```details_retriever.py``` - populates table with individual job attributes
 
 
-It's important to note that while ```search_retriever.py``` typically runs smoothly, even when using your personal IP and a single account, ```details_retriever.py``` can be a bit finicky. Each search generates approximately 25-50 results, all of which must be individually queried to obtain their attributes. To enhance its performance, I recommend the following strategies:
+It's important to note that while ```search_retriever.py``` typically runs smoothly, even through your personal IP and a singular account, ```details_retriever.py``` can be a bit finicky. Each search generates approximately 25-50 results, all of which must be individually queried to obtain their attributes. To enhance its performance, I recommend the following strategies:
 
 - Utilize multiple proxies and accounts when running details_retriever.py.
 - Experiment with different time delays to find the optimal settings.
