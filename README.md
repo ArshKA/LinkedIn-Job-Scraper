@@ -1,5 +1,7 @@
 # LinkedIn-Job-Scraper
 
+## An un-documented and un-polished repository to help others scrape LinkedIn job postings
+
 ```search_retriever.py``` - discovers new job postings and insert the most recent IDs into the database
 
 ```details_retriever.py``` - populates table with individual job attributes
