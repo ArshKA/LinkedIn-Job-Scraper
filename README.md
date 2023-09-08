@@ -1,6 +1,8 @@
 # LinkedIn-Job-Scraper
 
-## An un-documented and un-polished repository to help others scrape LinkedIn job postings
+**An un-documented and un-polished repository to assist others seeking to scrape jobs from LinkedIn**
+
+**Download the polished dataset and view insights at - https://www.kaggle.com/datasets/arshkon/linkedin-job-postings**
 
 ```search_retriever.py``` - discovers new job postings and insert the most recent IDs into the database
 
