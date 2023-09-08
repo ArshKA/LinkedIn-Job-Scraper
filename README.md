@@ -1,6 +1,6 @@
 # LinkedIn-Job-Scraper
 
-**An un-documented and crude repository to assist others seeking to scrape LinkedIn**
+**A crude and un-documented repository to assist others seeking to scrape LinkedIn**
 
 **Download the polished dataset and view insights at - https://www.kaggle.com/datasets/arshkon/linkedin-job-postings**
 
