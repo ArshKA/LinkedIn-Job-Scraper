@@ -84,6 +84,6 @@ def insert_data(data, conn, cursor):
 
 def insert_job_postings(job_ids, conn, cursor):
     for job_id, info in job_ids.items():
-        cursor.execute('INSERT OR IGNORE INTO jobs (job_id, sponsored) VALUES (?, ?)', (job_id, info['sponsored']))
+        cursor.execute('INSERT OR IGNORE INTO jobs (job_id, title, sponsored) VALUES (?, ?, ?)', (job_id, info['title'], info['sponsored']))
     conn.commit()
     return True
