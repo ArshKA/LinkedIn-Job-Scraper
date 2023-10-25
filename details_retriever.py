@@ -1,8 +1,8 @@
-from create_db import create_tables
-from database_scripts import insert_data, insert_job_postings
-from fetch import JobSearchRetriever, JobDetailRetriever
+from scripts.create_db import create_tables
+from scripts.database_scripts import insert_data
+from scripts.fetch import JobDetailRetriever
 import sqlite3
-from helpers import clean_job_postings
+from scripts.helpers import clean_job_postings
 import time
 
 SLEEP_TIME = 60

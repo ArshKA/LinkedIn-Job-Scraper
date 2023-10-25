@@ -1,7 +1,7 @@
 import pandas as pd
 
-variable_paths = pd.read_csv('data_variables.csv')
-included_paths = pd.read_csv('included_variables.csv')
+variable_paths = pd.read_csv('json_paths/data_variables.csv')
+included_paths = pd.read_csv('json_paths/included_variables.csv')
 
 size_ranges = {(None, 10): 0, (11, 50): 1, (51, 200): 2, (201, 500): 3, (501, 1000): 4, (1001, 5000): 5, (5001, 10000): 6, (10001, None): 7}
 

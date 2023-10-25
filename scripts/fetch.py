@@ -5,7 +5,7 @@ import time
 import requests
 import pandas as pd
 
-from helpers import strip_val, get_value_by_path
+from scripts.helpers import strip_val, get_value_by_path
 
 BROWSER = 'edge'
 
@@ -88,7 +88,7 @@ class JobDetailRetriever:
         emails, passwords = get_logins('details')
         self.sessions = [create_session(email, password) for email, password in zip(emails, passwords)]
         self.session_index = 0
-        self.variable_paths = pd.read_csv('data_variables.csv')
+        self.variable_paths = pd.read_csv('../json_paths/data_variables.csv')
 
         self.headers = [{
             'Authority': 'www.linkedin.com',

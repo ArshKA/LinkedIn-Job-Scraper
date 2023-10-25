@@ -1,6 +1,6 @@
-from create_db import create_tables
-from database_scripts import insert_data, insert_job_postings
-from fetch import JobSearchRetriever, JobDetailRetriever
+from scripts.create_db import create_tables
+from scripts.database_scripts import insert_job_postings
+from scripts.fetch import JobSearchRetriever
 import sqlite3
 import time
 from collections import deque
