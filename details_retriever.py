@@ -6,6 +6,7 @@ from scripts.helpers import clean_job_postings
 import time
 
 SLEEP_TIME = 60
+MAX_UPDATES = 25
 
 conn = sqlite3.connect('linkedin_jobs.db')
 cursor = conn.cursor()
@@ -21,11 +22,11 @@ while True:
     result = cursor.fetchall()
     result = [r[0] for r in result]
 
-    details = job_detail_retriever.get_job_details(result[:25])
+    details = job_detail_retriever.get_job_details(result[:MAX_UPDATES])
     details = clean_job_postings(details)
     insert_data(details, conn, cursor)
-    print('Updated {} results in DB'.format(len(details)))
+    print('UPDATED {} VALUES IN DB'.format(len(details)))
 
-    print('Sleeping...')
+    print('Sleeping For {} Seconds...'.format(SLEEP_TIME))
     time.sleep(SLEEP_TIME)
     print('Resuming...')

@@ -31,14 +31,12 @@ while True:
     insert_job_postings(new_results, conn, cursor)
     total_non_sponsored = len([x for x in all_results.values() if x['sponsored'] is False])
     new_non_sponsored = len([x for x in new_results.values() if x['sponsored'] is False])
-    print('{}/{} NEW RESULTS | {}/{} NEW UN-SPONSORED RESULTS'.format(
+    print('{}/{} NEW RESULTS | {}/{} NEW NON-PROMOTED RESULTS'.format(
         len(new_results), len(all_results), new_non_sponsored, total_non_sponsored))
     if not first:
         seconds_per_job = sleep_factor/max(len(new_results), 1)
         sleep_factor = seconds_per_job * total_non_sponsored * .75
     first = False
-    print('UPDATED SLEEP TIME:', sleep_factor)
+    print('Sleeping For {} Seconds...'.format(min(200, sleep_factor)))
 
-    print('Sleeping...')
     time.sleep(min(200, sleep_factor))
-    print('Resuming...')
