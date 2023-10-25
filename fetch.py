@@ -21,7 +21,7 @@ def create_session(email, password):
     driver.find_element(By.ID, 'password').send_keys(password)
     driver.find_element(By.XPATH, '//*[@id="organic-div"]/form/div[3]/button').click()
     time.sleep(1)
-    input('Press enter after a successful login: ')
+    input('Press ENTER after a successful login for "{}": '.format(email))
     driver.get('https://www.linkedin.com/jobs/search/?')
     time.sleep(1)
     cookies = driver.get_cookies()
@@ -62,7 +62,6 @@ class JobSearchRetriever:
 
     def get_jobs(self):
         results = self.sessions[self.session_index].get(self.job_search_link, headers=self.headers[self.session_index])
-        print(results)
         self.session_index = (self.session_index + 1) % len(self.sessions)
 
         if results.status_code != 200:

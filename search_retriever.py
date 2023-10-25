@@ -30,9 +30,9 @@ while True:
     new_results = {job_id: job_info for job_id, job_info in all_results.items() if job_id not in result}
     insert_job_postings(new_results, conn, cursor)
     total_non_sponsored = len([x for x in all_results.values() if x['sponsored'] is False])
-    total_new_non_sponsored = len([x for x in new_results.values() if x['sponsored'] is False])
-    print('TOTAL RESULTS: {} | TOTAL UN-SPONSORED: {} | TOTAL NEW RESULTS: {} | TOTAL NEW UN-SPONSORED: {}'.format(
-        len(all_results), total_non_sponsored, len(new_results), total_new_non_sponsored))
+    new_non_sponsored = len([x for x in new_results.values() if x['sponsored'] is False])
+    print('{}/{} NEW RESULTS | {}/{} NEW UN-SPONSORED RESULTS'.format(
+        len(new_results), len(all_results), new_non_sponsored, total_non_sponsored))
     if not first:
         seconds_per_job = sleep_factor/max(len(new_results), 1)
         sleep_factor = seconds_per_job * total_non_sponsored * .75
