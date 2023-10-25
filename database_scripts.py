@@ -33,11 +33,13 @@ def insert_data(data, conn, cursor):
                 elif table_name == 'industries' and 'industry_ids' in job_info[table_name]:
                     for industry_index in range(len(job_info[table_name]['industry_ids'])):
                         industry_id = job_info[table_name]['industry_ids'][industry_index]
-                        industry_name = job_info[table_name]['industry_names'][industry_index] if 'industry_names' in job_info[table_name] and job_info[table_name]['industry_names'] == len(job_info[table_name]['industry_ids']) else None
+                        industry_name = job_info[table_name]['industry_names'][industry_index] if 'industry_names' in job_info[table_name] and len(job_info[table_name]['industry_names']) == len(job_info[table_name]['industry_ids']) else None
 
                         cursor.execute(
                             'INSERT OR REPLACE INTO industries (industry_id, industry_name) VALUES (?, COALESCE((SELECT industry_name FROM industries WHERE industry_id=?), ?))',
                             (industry_id, industry_id, industry_name))
+                        # cursor.execute('INSERT OR IGNORE INTO job_industries (job_id, industry_id, industry_name) VALUES (?, ?, ?)',
+                        #                (job_id, industry_id, industry_name))
                         cursor.execute('INSERT OR IGNORE INTO job_industries (job_id, industry_id) VALUES (?, ?)',
                                        (job_id, industry_id))
 
@@ -45,10 +47,11 @@ def insert_data(data, conn, cursor):
                 elif table_name == 'skills' and 'skill_abrs' in job_info[table_name]:
                     for industry_index in range(len(job_info[table_name]['skill_abrs'])):
                         skill_abr = job_info[table_name]['skill_abrs'][industry_index]
-                        skill_name = job_info[table_name]['skill_name'][industry_index] if 'skill_name' in job_info[table_name] and job_info[table_name]['skill_name'] == len(job_info[table_name]['skill_abrs']) else None
+                        skill_name = job_info[table_name]['skill_name'][industry_index] if 'skill_name' in job_info[table_name] and len(job_info[table_name]['skill_name']) == len(job_info[table_name]['skill_abrs']) else None
                         cursor.execute(
                             'INSERT OR REPLACE INTO skills (skill_abr, skill_name) VALUES (?, COALESCE((SELECT skill_name FROM skills WHERE skill_abr=?), ?))',
                             (skill_abr, skill_abr, skill_name))
+                        # cursor.execute('INSERT OR IGNORE INTO job_skills (job_id, skill_abr, skill_name) VALUES (?, ?, ?)', (job_id, skill_abr, skill_name))
                         cursor.execute('INSERT OR IGNORE INTO job_skills (job_id, skill_abr) VALUES (?, ?)', (job_id, skill_abr))
 
                 elif table_name == 'salaries':
