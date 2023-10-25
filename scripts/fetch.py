@@ -88,7 +88,7 @@ class JobDetailRetriever:
         emails, passwords = get_logins('details')
         self.sessions = [create_session(email, password) for email, password in zip(emails, passwords)]
         self.session_index = 0
-        self.variable_paths = pd.read_csv('../json_paths/data_variables.csv')
+        self.variable_paths = pd.read_csv('json_paths/data_variables.csv')
 
         self.headers = [{
             'Authority': 'www.linkedin.com',
