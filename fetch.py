@@ -27,10 +27,17 @@ def create_session(email, password):
         session.cookies.set(cookie['name'], cookie['value'])
     return session
 
+def get_logins(method):
+    logins = pd.read_csv('logins.csv')
+    logins = logins[logins['method'] == method]
+    emails = logins['emails'].tolist()
+    passwords = logins['passwords'].tolist()
+    return emails, passwords
 
 class JobSearchRetriever:
-    def __init__(self, emails, passwords):
+    def __init__(self):
         self.job_search_link = 'https://www.linkedin.com/voyager/api/voyagerJobsDashJobCards?decorationId=com.linkedin.voyager.dash.deco.jobs.search.JobSearchCardsCollection-187&count=100&q=jobSearch&query=(origin:JOB_SEARCH_PAGE_OTHER_ENTRY,selectedFilters:(sortBy:List(DD)),spellCorrectionEnabled:true)&start=0'
+        emails, passwords = get_logins('search')
         self.sessions = [create_session(email, password) for email, password in zip(emails, passwords)]
         self.session_index = 0
         self.headers = [{
@@ -72,9 +79,10 @@ class JobSearchRetriever:
         return job_ids
 
 class JobDetailRetriever:
-    def __init__(self, emails, passwords):
+    def __init__(self):
         self.error_count = 0
         self.job_details_link = "https://www.linkedin.com/voyager/api/jobs/jobPostings/{}?decorationId=com.linkedin.voyager.deco.jobs.web.shared.WebFullJobPosting-65"
+        emails, passwords = get_logins('details')
         self.sessions = [create_session(email, password) for email, password in zip(emails, passwords)]
         self.session_index = 0
         self.variable_paths = pd.read_csv('data_variables.csv')
