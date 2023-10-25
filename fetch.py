@@ -17,7 +17,7 @@ def create_session(email, password):
     driver.find_element(By.ID, 'password').send_keys(password)
     driver.find_element(By.XPATH, '//*[@id="organic-div"]/form/div[3]/button').click()
     time.sleep(1)
-    input('Press enter to continue: ')
+    input('Press enter after a successful login: ')
     driver.get('https://www.linkedin.com/jobs/search/?')
     time.sleep(1)
     cookies = driver.get_cookies()
@@ -30,13 +30,13 @@ def create_session(email, password):
 
 class JobSearchRetriever:
     def __init__(self, emails, passwords):
-        self.job_search_link = 'https://www.linkedin.com/voyager/api/search/hits?decorationId=com.linkedin.voyager.deco.jserp.WebJobSearchHitWithSalary-25&count=50&filters=List(sortBy-%3EDD,resultType-%3EJOBS)&origin=JOB_SEARCH_PAGE_JOB_FILTER&q=jserpFilters&queryContext=List(primaryHitType-%3EJOBS,spellCorrectionEnabled-%3Etrue)&start=0&topNRequestedFlavors=List()'
+        self.job_search_link = 'https://www.linkedin.com/voyager/api/voyagerJobsDashJobCards?decorationId=com.linkedin.voyager.dash.deco.jobs.search.JobSearchCardsCollection-187&count=100&q=jobSearch&query=(origin:JOB_SEARCH_PAGE_OTHER_ENTRY,selectedFilters:(sortBy:List(DD)),spellCorrectionEnabled:true)&start=0'
         self.sessions = [create_session(email, password) for email, password in zip(emails, passwords)]
         self.session_index = 0
         self.headers = [{
             'Authority': 'www.linkedin.com',
             'Method': 'GET',
-            'Path': '/voyager/api/search/hits?decorationId=com.linkedin.voyager.deco.jserp.WebJobSearchHitWithSalary-25&count=25&filters=List(sortBy-%3EDD,resultType-%3EJOBS)&origin=JOB_SEARCH_PAGE_JOB_FILTER&q=jserpFilters&queryContext=List(primaryHitType-%3EJOBS,spellCorrectionEnabled-%3Etrue)&start=0&topNRequestedFlavors=List(HIDDEN_GEM,IN_NETWORK,SCHOOL_RECRUIT,COMPANY_RECRUIT,SALARY,JOB_SEEKER_QUALIFIED,PRE_SCREENING_QUESTIONS,SKILL_ASSESSMENTS,ACTIVELY_HIRING_COMPANY,TOP_APPLICANT)',
+            'Path': 'voyager/api/voyagerJobsDashJobCards?decorationId=com.linkedin.voyager.dash.deco.jobs.search.JobSearchCardsCollection-187&count=25&q=jobSearch&query=(origin:JOB_SEARCH_PAGE_OTHER_ENTRY,selectedFilters:(sortBy:List(DD)),spellCorrectionEnabled:true)&start=0',
             'Scheme': 'https',
             'Accept': 'application/vnd.linkedin.normalized+json+2.1',
             'Accept-Encoding': 'gzip, deflate, br',
@@ -51,6 +51,7 @@ class JobSearchRetriever:
 
     def get_jobs(self):
         results = self.sessions[self.session_index].get(self.job_search_link, headers=self.headers[self.session_index])
+        print(results)
         self.session_index = (self.session_index + 1) % len(self.sessions)
 
         if results.status_code != 200:
@@ -58,13 +59,15 @@ class JobSearchRetriever:
         results = results.json()
         job_ids = {}
 
-        for r in results['data']['elements']:
-            job_id = int(strip_val(r['hitInfo']['jobPosting'], 1))
-            job_ids[job_id] = {}
-            if r['hitInfo'].get('sponsored'):
-                job_ids[job_id]['sponsored'] = True
-            else:
-                job_ids[job_id]['sponsored'] = False
+        for r in results['included']:
+            if r['$type'] == 'com.linkedin.voyager.dash.jobs.JobPostingCard' and 'referenceId' in r:
+                job_id = int(strip_val(r['jobPostingUrn'], 1))
+                job_ids[job_id] = {'sponsored': False}
+                job_ids[job_id]['title'] = r.get('jobPostingTitle')
+                for x in r['footerItems']:
+                    if x.get('type') == 'PROMOTED':
+                        job_ids[job_id]['sponsored'] = True
+                        break
 
         return job_ids
 
