@@ -5,8 +5,8 @@ import sqlite3
 from helpers import clean_job_postings
 import time
 
-USERNAMES = ['example@gmail.com', 'example2@gmail.com']
-PASSWORDS = ['example_password', 'example_password2']
+USERNAMES = ['example1@gmail.com', 'example2@gmail.com']
+PASSWORDS = ['example1 password', 'example2 password']
 
 conn = sqlite3.connect('linkedin_jobs.db')
 cursor = conn.cursor()
@@ -25,6 +25,6 @@ while True:
     details = job_detail_retriever.get_job_details(result[:25])
     details = clean_job_postings(details)
     insert_data(details, conn, cursor)
-    print('Updated {} results in DB').format(len(details))
+    print('Updated {} results in DB'.format(len(details)))
     time.sleep(60)
 
