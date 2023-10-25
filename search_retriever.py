@@ -8,8 +8,6 @@ import pandas as pd
 
 logins = pd.read_csv
 
-# USERNAMES = ['example1@gmail.com', 'example2@gmail.com']
-# PASSWORDS = ['example1 password', 'example2 password']
 
 sleep_times = deque(maxlen=5)
 first = True
