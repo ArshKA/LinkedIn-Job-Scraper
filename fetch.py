@@ -7,9 +7,13 @@ import pandas as pd
 
 from helpers import strip_val, get_value_by_path
 
+BROWSER = 'edge'
 
 def create_session(email, password):
-    driver = webdriver.Chrome()
+    if BROWSER == 'chrome':
+        driver = webdriver.Chrome()
+    elif BROWSER == 'edge':
+        driver = webdriver.Edge()
 
     driver.get('https://www.linkedin.com/checkpoint/rm/sign-in-another-account')
     time.sleep(1)

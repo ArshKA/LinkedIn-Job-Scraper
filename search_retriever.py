@@ -21,7 +21,6 @@ create_tables(conn, cursor)
 job_searcher = JobSearchRetriever()
 
 while True:
-    time.sleep(min(200, sleep_factor))
     all_results = job_searcher.get_jobs()
 
     query = "SELECT job_id FROM jobs WHERE job_id IN ({})".format(','.join(['?'] * len(all_results)))
@@ -40,3 +39,6 @@ while True:
     first = False
     print('UPDATED SLEEP TIME:', sleep_factor)
 
+    print('Sleeping...')
+    time.sleep(min(200, sleep_factor))
+    print('Resuming...')

@@ -1,0 +1,7 @@
+# Python related files/folders
+/__pycache__/
+/.venv/
+# Prevent accidental upload of login info
+/logins.csv
+# Ignore backups of db (e.g. linkedin_jobs.db.bak)
+/linkedin_jobs.db.*
