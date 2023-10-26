@@ -6,8 +6,6 @@ import time
 from collections import deque
 import pandas as pd
 
-logins = pd.read_csv
-
 
 sleep_times = deque(maxlen=5)
 first = True
