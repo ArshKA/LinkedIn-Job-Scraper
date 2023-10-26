@@ -2,7 +2,7 @@
 
 <img src="media/logo.jpg" width="530" height="267">
 
-**Program to scrape and organize all new LinkedIn job postings and dozens of respective attributes**
+**Program to scrape and organize a constant stream of LinkedIn job postings and dozens of respective attributes**
 
 **Download the polished dataset and view insights at - https://www.kaggle.com/datasets/arshkon/linkedin-job-postings**
 
