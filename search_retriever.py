@@ -37,6 +37,7 @@ while True:
         seconds_per_job = sleep_factor/max(len(new_results), 1)
         sleep_factor = seconds_per_job * total_non_sponsored * .75
     first = False
-    print('Sleeping For {} Seconds...'.format(min(200, sleep_factor)))
 
+    print('Sleeping For {} Seconds...'.format(min(200, sleep_factor)))
     time.sleep(min(200, sleep_factor))
+    print('Resuming...')
