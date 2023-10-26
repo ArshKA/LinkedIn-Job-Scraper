@@ -73,8 +73,19 @@ It's important to note that while ```search_retriever.py``` typically runs smoot
 | job_region | EMPTY |
 | degree | EMPTY |
 
-### BENEFITS
+### SALARIES
+| Column | Description |
+| --- | --- |
+| salary_id | The salary ID |
+| job_id | The job ID (references jobs table) |
+| max_salary | Maximum salary |
+| med_salary | Median salary |
+| min_salary | Minimum salary |
+| pay_period | Pay period for salary (Hourly, Monthly, Yearly) |
+| currency | Currency in which the salary is provided |
+| compensation_type | Type of compensation for the job (Fixed, Variable, etc) |
 
+### BENEFITS
 | Column | Description |
 | --- | --- |
 | job_id | The job ID |
@@ -94,4 +105,49 @@ It's important to note that while ```search_retriever.py``` typically runs smoot
 | zip_code | ZIP code of company's headquarters |
 | address | Address of company's headquarters |
 | url | Link to company's LinkedIn page |
+
+### EMPLOYEE_COUNTS
+| Column | Description |
+| --- | --- |
+| company_id | The company ID |
+| employee_count | Number of employees at company |
+| follower_count | Number of company followers on LinkedIn |
+| time_recorded | Unix time of data collection |
+
+### SKILLS
+| Column | Description |
+| --- | --- |
+| skill_abr | The skill abbreviation (primary key) |
+| skill_name | The skill name |
+
+### JOB_SKILLS
+| Column | Description |
+| --- | --- |
+| job_id | The job ID (references jobs table and primary key) |
+| skill_abr | The skill abbreviation (references skills table) |
+
+### INDUSTRIES
+| Column | Description |
+| --- | --- |
+| industry_id | The industry ID (primary key) |
+| industry_name | The industry name |
+
+### JOB_INDUSTRIES
+| Column | Description |
+| --- | --- |
+| job_id | The job ID (references jobs table and primary key) |
+| industry_id | The industry ID (references industries table) |
+
+### COMPANY_SPECIALITIES
+| Column | Description |
+| --- | --- |
+| company_id | The company ID (references companies table and primary key) |
+| speciality | The speciality ID |
+
+### COMPANY_INDUSTRIES
+| Column | Description |
+| --- | --- |
+| company_id | The company ID (references companies table and primary key) |
+| industry | The industry ID |
+
 
