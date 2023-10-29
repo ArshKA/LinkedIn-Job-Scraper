@@ -71,7 +71,7 @@ def insert_data(data, conn, cursor):
                     cursor.execute(query, values)
 
                 elif table_name == 'employee_counts' and company_id is not None:
-                    cursor.execute(f"INSERT INTO {table_name} (company_id, employee_count, follower_count, time_recorded) VALUES (?, ?, ?, ?)", (company_id, job_info[table_name]['employee_count'], job_info[table_name]['follower_count'], round(time.time())))
+                    cursor.execute(f"INSERT OR IGNORE INTO {table_name} (company_id, employee_count, follower_count, time_recorded) VALUES (?, ?, ?, ?)", (company_id, job_info[table_name]['employee_count'], job_info[table_name]['follower_count'], round(time.time())))
 
                 elif table_name == 'company_industries' and company_id is not None:
                     for industry in job_info[table_name]['industries']:

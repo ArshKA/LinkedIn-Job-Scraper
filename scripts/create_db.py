@@ -129,14 +129,15 @@ def create_tables(conn, cursor):
         )
     ''')
 
+#           record_id INTEGER PRIMARY KEY AUTOINCREMENT,
     cursor.execute('''
       CREATE TABLE IF NOT EXISTS employee_counts (
-          record_id INTEGER PRIMARY KEY AUTOINCREMENT,
           company_id INTEGER NOT NULL,
           employee_count INTEGER,
           follower_count INTEGER,
           time_recorded INTEGER NOT NULL,
           FOREIGN KEY (company_id) REFERENCES companies (company_id)
+          PRIMARY KEY ( employee_count, company_id)
       )
     ''')
     cursor.execute('''
