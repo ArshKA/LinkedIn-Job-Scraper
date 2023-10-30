@@ -34,6 +34,13 @@ It's important to note that while ```search_retriever.py``` typically runs smoot
 - Experiment with different time delays to find the optimal settings.
 - Run details_retriever.py during periods of lower online activity, such as late-night hours and weekends, to catch up with the progress of search_retriever.py. This will ensure that both processes remain synchronized and up to date.
 
+## Converting Database to CSV
+
+```python to_csv.py --folder <destination folder> --database <linkedin_jobs.db>```
+
+Creates a CSV file for each database, along with minimal preprocessing
+
+
 ## Database Structure
 
 ### JOBS
