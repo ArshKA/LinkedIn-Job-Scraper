@@ -61,7 +61,7 @@ salaries.drop(columns='salary_id', inplace=True)
 
 merged_df = pd.merge(jobs, salaries, on='job_id', how='left')
 
-merged_df = merged_df.drop(columns='scraped')
+# merged_df = merged_df.drop(columns='scraped')
 
 col = ['job_id', 'company_id', 'title', 'description', 'max_salary', 'med_salary', 'min_salary', 'pay_period',
        'formatted_work_type', 'location',
@@ -71,7 +71,7 @@ col = ['job_id', 'company_id', 'title', 'description', 'max_salary', 'med_salary
        'skills_desc',
        'listed_time', 'posting_domain', 'sponsored', 'work_type',
        'currency',
-       'compensation_type']
+       'compensation_type', 'scraped']
 
 merged_df = merged_df[col]
 
