@@ -55,7 +55,7 @@ def create_tables(conn, cursor):
           skill_abr TEXT,
           FOREIGN KEY (job_id) REFERENCES jobs(job_id),
           FOREIGN KEY (skill_abr) REFERENCES skills(skill_abr),
-          PRIMARY KEY (job_id)
+          PRIMARY KEY (job_id, skill_abr)
       )
     ''')
 
@@ -84,7 +84,7 @@ def create_tables(conn, cursor):
           industry_id INTEGER,
           FOREIGN KEY (job_id) REFERENCES jobs(job_id),
           FOREIGN KEY (industry_id) REFERENCES industries(industry_id),
-          PRIMARY KEY (job_id)
+          PRIMARY KEY (job_id, industry_id)
       )
     ''')
 
@@ -108,7 +108,7 @@ def create_tables(conn, cursor):
           inferred INTEGER NOT NULL,
           type TEXT NOT NULL,
           FOREIGN KEY (job_id) REFERENCES job_postings (job_id),
-          PRIMARY KEY (job_id)
+          PRIMARY KEY (job_id, type)
       )
     ''')
 
@@ -144,8 +144,9 @@ def create_tables(conn, cursor):
       CREATE TABLE IF NOT EXISTS company_specialities (
           company_id INTEGER NOT NULL,
           speciality INTEGER NOT NULL,
-          PRIMARY KEY (company_id)
-          FOREIGN KEY (company_id) REFERENCES companies (company_id)
+          FOREIGN KEY (company_id) REFERENCES companies (company_id),
+          PRIMARY KEY (company_id, speciality)
+
       )
     ''')
 
@@ -154,8 +155,8 @@ def create_tables(conn, cursor):
       CREATE TABLE IF NOT EXISTS company_industries (
           company_id INTEGER NOT NULL,
           industry INTEGER NOT NULL,
-          PRIMARY KEY (company_id)
-          FOREIGN KEY (company_id) REFERENCES companies (company_id)
+          FOREIGN KEY (company_id) REFERENCES companies (company_id),
+          PRIMARY KEY (company_id, industry)
       )
     ''')
 
