@@ -14,7 +14,7 @@ def insert_data(data, conn, cursor):
                     values = tuple(job_info[table_name][column] for column in column_names)
                     set_clause = ", ".join([f"{column} = ?" for column in column_names])
                     set_clause += ", scraped = ?"
-                    values_for_update = values + (time.time(), job_id)  # Adding the job_id as the last value
+                    values_for_update = values + (int(time.time()), job_id)  # Adding the job_id as the last value
                     query = f"UPDATE {table_name} SET {set_clause} WHERE job_id = ?"
                     cursor.execute(query, values_for_update)
 
@@ -90,3 +90,5 @@ def insert_job_postings(job_ids, conn, cursor):
         cursor.execute('INSERT OR IGNORE INTO jobs (job_id, title, sponsored) VALUES (?, ?, ?)', (job_id, info['title'], info['sponsored']))
     conn.commit()
     return True
+
+
