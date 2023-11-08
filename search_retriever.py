@@ -16,6 +16,7 @@ cursor = conn.cursor()
 
 create_tables(conn, cursor)
 
+
 job_searcher = JobSearchRetriever()
 
 while True:
@@ -33,7 +34,7 @@ while True:
         len(new_results), len(all_results), new_non_sponsored, total_non_sponsored))
     if not first:
         seconds_per_job = sleep_factor/max(len(new_results), 1)
-        sleep_factor = seconds_per_job * total_non_sponsored * .75
+        sleep_factor = min(seconds_per_job * total_non_sponsored * .75, 200)
     first = False
 
     print('Sleeping For {} Seconds...'.format(min(200, sleep_factor)))
