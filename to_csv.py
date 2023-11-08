@@ -15,7 +15,8 @@ args = parser.parse_args()
 
 folder_name = args.folder
 
-os.mkdir(folder_name)
+if not os.path.exists(folder_name):
+    os.mkdir(folder_name)
 
 # Connect to the SQLite database
 conn = sqlite3.connect(args.database)
@@ -40,7 +41,7 @@ for table_name in table_names:
   csv_filename = f'{folder_name}/{table_name}.csv'
 
   # Write the data to the CSV file
-  with open(csv_filename, 'w', newline='') as csv_file:
+  with open(csv_filename, 'w', newline='', encoding='utf-8') as csv_file:
       csv_writer = csv.writer(csv_file)
 
       # Write header row with column names
@@ -54,7 +55,7 @@ for table_name in table_names:
 conn.close()
 
 jobs = pd.read_csv(f'{folder_name}/jobs.csv')
-jobs = jobs[jobs['scraped'] == 1]
+jobs = jobs[jobs['scraped'] > 0]
 
 salaries = pd.read_csv(f'{folder_name}/salaries.csv')
 salaries.drop(columns='salary_id', inplace=True)
