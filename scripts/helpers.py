@@ -26,22 +26,25 @@ def get_value_by_path(dictionary, path):
 def clean_job_postings(all_jobs):
     all_cleaned_postings = dict()
     for job_id, job_info in all_jobs.items():
-        posting = {'jobs': {}, 'companies': {}, 'salaries': {}, 'benefits': {}, 'industries': {}, 'skills': {}, 'employee_counts': {}, 'company_industries': {}, 'company_specialities': {}}
-        for idx, row in variable_paths.iterrows():
-            value = get_value_by_path(job_info, row['path'])
-            if value:
-                posting[row['table']][row['name']] = strip_val(value, row['strip'])
+        if job_info == -1:
+            posting = {'error': job_info}
+        else:
+            posting = {'jobs': {}, 'companies': {}, 'salaries': {}, 'benefits': {}, 'industries': {}, 'skills': {}, 'employee_counts': {}, 'company_industries': {}, 'company_specialities': {}}
+            for idx, row in variable_paths.iterrows():
+                value = get_value_by_path(job_info, row['path'])
+                if value:
+                    posting[row['table']][row['name']] = strip_val(value, row['strip'])
 
-        for idx, row in included_paths.iterrows():
-            for into_type in job_info['included']:
-                if strip_val(into_type.get('$type'), 2) == row['type']:
-                    if row['name'] == 'company_size':
-                        company_size_info = get_value_by_path(into_type, row['path'])
-                        if company_size_info:
-                            posting[row['table']][row['name']] = size_ranges.get((company_size_info.get('start'), company_size_info.get('end')))
-                    else:
-                        value = get_value_by_path(into_type, row['path'])
-                        posting[row['table']][row['name']] = strip_val(value, row['strip'])
+            for idx, row in included_paths.iterrows():
+                for into_type in job_info['included']:
+                    if strip_val(into_type.get('$type'), 2) == row['type']:
+                        if row['name'] == 'company_size':
+                            company_size_info = get_value_by_path(into_type, row['path'])
+                            if company_size_info:
+                                posting[row['table']][row['name']] = size_ranges.get((company_size_info.get('start'), company_size_info.get('end')))
+                        else:
+                            value = get_value_by_path(into_type, row['path'])
+                            posting[row['table']][row['name']] = strip_val(value, row['strip'])
 
 
         # posting['companies']['size_range'] = size_ranges.get(job_info['included'][-1])

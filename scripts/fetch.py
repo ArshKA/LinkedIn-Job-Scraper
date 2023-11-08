@@ -7,6 +7,9 @@ import pandas as pd
 
 from scripts.helpers import strip_val, get_value_by_path
 
+# Proton mail: botmoment@protonmail.com
+# Proxiedmail
+
 BROWSER = 'edge'
 
 def create_session(email, password):
@@ -55,9 +58,9 @@ class JobSearchRetriever:
             'Cookie': "; ".join([f"{key}={value}" for key, value in session.cookies.items()]),
             'Csrf-Token': session.cookies.get('JSESSIONID').strip('"'),
             # 'TE': 'Trailers',
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36',
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36',
             # 'X-Li-Track': '{"clientVersion":"1.12.7990","mpVersion":"1.12.7990","osName":"web","timezoneOffset":-7,"timezone":"America/Los_Angeles","deviceFormFactor":"DESKTOP","mpName":"voyager-web","displayDensity":1,"displayWidth":1920,"displayHeight":1080}'
-            'X-Li-Track': '{"clientVersion":"1.13.5589","mpVersion":"1.13.5589","osName":"web","timezoneOffset":-7,"timezone":"America/Los_Angeles","deviceFormFactor":"DESKTOP","mpName":"voyager-web","displayDensity":1,"displayWidth":1920,"displayHeight":1080}'
+            'X-Li-Track': '{"clientVersion":"1.13.5589","mpVersion":"1.13.5589","osName":"web","timezoneOffset":-7,"timezone":"America/Los_Angeles","deviceFormFactor":"DESKTOP","mpName":"voyager-web","displayDensity":1,"displayWidth":360,"displayHeight":800}'
         } for session in self.sessions]
 
     def get_jobs(self):
@@ -86,6 +89,7 @@ class JobDetailRetriever:
         self.error_count = 0
         self.job_details_link = "https://www.linkedin.com/voyager/api/jobs/jobPostings/{}?decorationId=com.linkedin.voyager.deco.jobs.web.shared.WebFullJobPosting-65"
         emails, passwords = get_logins('details')
+        self.emails = emails
         self.sessions = [create_session(email, password) for email, password in zip(emails, passwords)]
         self.session_index = 0
         self.variable_paths = pd.read_csv('json_paths/data_variables.csv')
@@ -101,9 +105,9 @@ class JobDetailRetriever:
             'Cookie': "; ".join([f"{key}={value}" for key, value in session.cookies.items()]),
             'Csrf-Token': session.cookies.get('JSESSIONID').strip('"'),
             # 'TE': 'Trailers',
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36',
-            # 'X-Li-Track': '{"clientVersion":"1.12.7880","mpVersion":"1.12.7880","osName":"web","timezoneOffset":-7,"timezone":"America/Los_Angeles","deviceFormFactor":"DESKTOP","mpName":"voyager-web","displayDensity":1,"displayWidth":1920,"displayHeight":1080}'
-            'X-Li-Track': '{"clientVersion":"1.13.5589","mpVersion":"1.13.5589","osName":"web","timezoneOffset":-7,"timezone":"America/Los_Angeles","deviceFormFactor":"DESKTOP","mpName":"voyager-web","displayDensity":1,"displayWidth":1920,"displayHeight":1080}'
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36',
+            # 'X-Li-Track': '{"clientVersion":"1.12.7990","mpVersion":"1.12.7990","osName":"web","timezoneOffset":-7,"timezone":"America/Los_Angeles","deviceFormFactor":"DESKTOP","mpName":"voyager-web","displayDensity":1,"displayWidth":1920,"displayHeight":1080}'
+            'X-Li-Track': '{"clientVersion":"1.13.5589","mpVersion":"1.13.5589","osName":"web","timezoneOffset":-7,"timezone":"America/Los_Angeles","deviceFormFactor":"DESKTOP","mpName":"voyager-web","displayDensity":1,"displayWidth":360,"displayHeight":800}'
         } for session in self.sessions]
 
         # self.proxies = [{'http': f'http://{proxy}', 'https': f'http://{proxy}'} for proxy in []]
@@ -119,8 +123,8 @@ class JobDetailRetriever:
                 print('Timeout for job {}'.format(job_id))
                 error = True
             if details.status_code != 200:
-                job_details[job_id] = False
-                print('Status code {} for job {}\nText: {}'.format(details.status_code, job_id, details.text))
+                job_details[job_id] = -1
+                print('Status code {} for job {} with account {}\nText: {}'.format(details.status_code, job_id, self.emails[self.session_index], details.text))
                 error = True
             if error:
                 self.error_count += 1

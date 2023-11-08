@@ -3,8 +3,8 @@ import time
 
 def insert_data(data, conn, cursor):
     for job_id, job_info in data.items():
-        if not job_info:
-            cursor.execute(f"UPDATE jobs SET scraped = 1 WHERE job_id = ?", (job_id,))
+        if 'error' in job_info:
+            cursor.execute(f"UPDATE jobs SET scraped = -1 WHERE job_id = ?", (job_id,))
             continue
         company_id = job_info['jobs'].get('company_id')
         for table_name in job_info:
