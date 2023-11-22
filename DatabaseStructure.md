@@ -1,3 +1,5 @@
+# Database Structure
+
 ### JOBS
 
 | Column | Description |
