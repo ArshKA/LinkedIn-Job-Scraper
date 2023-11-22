@@ -4,7 +4,7 @@
 
 | Column | Description |
 | --- | --- |
-| job_id | The job ID as defined by LinkedIn (https://www.linkedin.com/jobs/view/{job_id}) |
+| job_id | The job ID as defined by LinkedIn (https://www.linkedin.com/jobs/view/{ job_id }) |
 | company_id | Identifier for the company associated with the job posting (maps to companies.csv) |
 | title | Job title |
 | description | Job description |
