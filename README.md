@@ -43,4 +43,4 @@ Creates a CSV file for each database, along with minimal preprocessing
 
 ## Database Structure
 
-
+[You can find the structure of the database here](DatabaseStructure.md)
