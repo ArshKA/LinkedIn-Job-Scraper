@@ -13,7 +13,6 @@
   - Populate with multiple LinkedIn logins
   - Specify the purpose of the login (search or detail retreiever)
   - I recommend 1-3 logins for search and the remaining for more expensive attribute retrieval
-- **```search_retriever.py```**
 ## Optional
 - **```details_retriever.py```**
   - **MAX_UPDATES**: - Number of job postings to look up before sleeping. Increase with more accounts/proxies (default = 25)
@@ -23,9 +22,9 @@
 
 This program consists of 2 main scripts, running in parallel.
 
-```search_retriever.py``` - discovers new job postings and insert the most recent IDs and minimal attributes into the database
+```python search_retriever.py``` - discovers new job postings and insert the most recent IDs and minimal attributes into the database
 
-```details_retriever.py``` - populates tables with complete job attributes
+```python details_retriever.py``` - populates tables with complete job attributes
 
 
 It's important to note that while ```search_retriever.py``` typically runs smoothly, even through your personal IP and a singular account, ```details_retriever.py``` can be a bit finicky. Each search generates approximately 25-50 results, all of which must be individually queried to obtain their attributes. To enhance its performance, I recommend the following strategies:
