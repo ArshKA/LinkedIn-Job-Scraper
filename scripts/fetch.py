@@ -7,8 +7,6 @@ import pandas as pd
 
 from scripts.helpers import strip_val, get_value_by_path
 
-# Proton mail: botmoment@protonmail.com
-# Proxiedmail
 
 BROWSER = 'edge'
 
