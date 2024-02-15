@@ -20,7 +20,7 @@
 
 ## Running
 
-This program consists of 2 main scripts, running in parallel.
+This program consists of 2 main scripts, running in parallel:
 
 ```python search_retriever.py``` - discovers new job postings and insert the most recent IDs and minimal attributes into the database
 
